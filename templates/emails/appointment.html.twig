@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="card m-4">
+            <div class="alert alert-info" role="alert">
+                Merci de valider ce rendez-vous
+            </div>
+            <h5 class="card-header">Notification d'un Rendez-vous <span class="badge rounded-pill bg-danger">New</span>
+            </h5>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>Firstname:</td>
+                    <td>{{ appointment.firstname }}</td>
+                </tr>
+                <tr>
+                    <td>Lastname:</td>
+                    <td>{{ appointment.lastname }}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>{{ appointment.email }}</td>
+                </tr>
+                <tr>
+                    <td>Service:</td>
+                    <td>
+                        {% for appointment in appointment.services %}
+                            {{ appointment.type }}<br>
+                        {% endfor %}</td>
+                </tr>
+                <tr>
+                    <td>Option:</td>
+                    <td>
+                        {% for appointment in appointment.options %}
+                            {{ appointment.name }}<br>
+                        {% endfor %}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

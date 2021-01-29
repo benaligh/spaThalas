@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="card m-4">
+            <h5 class="card-header text-center">Bon de Commande: {{ appointment.firstname }} {{ appointment.lastname }}</h5>
+            <h6 class="card-header text-right"> Tunis le {{ "now"|date("m/d/Y") }}</h6>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>Firstname:</td>
+                    <td>{{ appointment.firstname }}</td>
+                </tr>
+                <tr>
+                    <td>Lastname:</td>
+                    <td>{{ appointment.lastname }}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>{{ appointment.email }}</td>
+                </tr>
+                <tr>
+                    <td>Service:</td>
+                    <td>
+                        {% for appointment in appointment.services %}
+                            {{ appointment.type }}<br>
+                        {% endfor %}</td>
+                </tr>
+                <tr>
+                    <td>Option:</td>
+                    <td>
+                        {% for appointment in appointment.options %}
+                            {{ appointment.name }}<br>
+                        {% endfor %}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

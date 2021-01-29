@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer les Rendez-vous {% endblock %}
+{% block body %}
+    <div class="container mt-4">
+
+        <h4>Gérer les Rendez-vous</h4>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Services</th>
+
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for appointment in appointments %}
+
+            <tr>
+                <td>{{ appointment.firstname }}</td>
+                <td>{{ appointment.lastname }}</td>
+                <td>{{ appointment.email }}</td>
+                <td>
+                    {% for appointment in appointment.services %}
+                        {{ appointment.type }}<br>
+                    {% endfor %}
+                </td>
+
+                <td>
+                    {% for appointment in appointment.options %}
+                        {{ appointment.name }}<br>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if appointment.status == 1 %}
+                        <div class="" style="color: green">Validé</div>
+                    {% else %}
+                        <a href="{{ path('appointment_valid',{id: appointment.id} ) }}" class="btn btn-primary"
+                           onclick="confirm('étes vous vraiment sur vouloir valider ce rendez-vous ...? ')">Valider</a>
+                    {% endif %}
+                </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+
+        </table>
+        {# display navigation #}
+        <div class="navigation" style="padding-left: 350px">
+            {{ knp_pagination_render(appointments) }}
+        </div>
+    </div>
+
+
+
+{% endblock %}
